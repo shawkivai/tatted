@@ -1,5 +1,4 @@
 
-
 @extends('layouts.menu')
 
 @section('content')
@@ -12,7 +11,6 @@
 	</div>
 </div>
 
-@include('pages.businessRegistration')
 
 <!-- ============ Appointment Form ============ -->
 
