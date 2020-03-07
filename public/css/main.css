@@ -1721,7 +1721,8 @@ input.submit {
 
 select,
 .hidden-field {
-    display: none;
+    /*display: none;*/
+    color: #0b2e13;
 }
 
 .hidden-field.show {
@@ -1879,6 +1880,10 @@ input[type=radio]:checked + .radio-replacer {
     margin: 20px 0 0;
     padding: 0;
     font-weight: 600;
+    color: #0b2e13;
+    padding: 10px 40px;
+    border: 1px solid #cccccc;
+    cursor: pointer;
 }
 
 .select-replacer li {
@@ -3706,4 +3711,62 @@ html[xmlns] .flexslider .slides,
         opacity: 1;
     }
 
+}
+
+.apt-mt{
+    margin-top: 20px;
+}
+.tatto-size-customize{
+    width: 30% !important;
+    padding: 6px !important;
+}
+.tatto-lenth-customize{
+    padding: 8px;
+}
+
+input[type=checkbox] + label {
+    display: inline-block;
+    margin: 0.2em;
+    cursor: pointer;
+    padding: 0.2em;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+input[type=checkbox] + label:before {
+    content: "\2714";
+    border: 0.1em solid #000;
+    border-radius: 0.4em;
+    display: inline-block;
+    width: 1.5em;
+    height: 1.6em;
+    padding-left: 0.2em;
+    padding-bottom: 0.3em;
+    margin-right: 0.6em;
+    vertical-align: bottom;
+    color: transparent;
+    transition: .2s;
+}
+
+input[type=checkbox] + label:active:before {
+    transform: scale(0);
+}
+
+input[type=checkbox]:checked + label:before {
+    background-color: MediumSeaGreen;
+    border-color: MediumSeaGreen;
+    color: #fff;
+}
+
+input[type=checkbox]:disabled + label:before {
+    transform: scale(1);
+    border-color: #aaa;
+}
+
+input[type=checkbox]:checked:disabled + label:before {
+    transform: scale(1);
+    background-color: #bfb;
+    border-color: #bfb;
 }
