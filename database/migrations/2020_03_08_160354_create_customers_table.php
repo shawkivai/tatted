@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomeresTable extends Migration
+class CreateCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,20 @@ class CreateCustomeresTable extends Migration
      */
     public function up()
     {
-        Schema::create('customeres', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('state_id');
             $table->unsignedBigInteger('postcode_id');
             $table->unsignedBigInteger('suburb_id');
-            $table->string('name');
-            $table->string('email');
-            $table->string('tattoo_type');
-            $table->double('tatoo_length',8, 2);
-            $table->double('tatoo_width',8, 2);
-            $table->string('tattoo_color');
-            $table->string('skin_type');
-            $table->string('tattoo_age');
-            $table->text('tattoo_description')->nullable();
+            $table->STRING('name');
+            $table->STRING('email');
+            $table->STRING('tattoo_type');
+            $table->DOUBLE('tattoo_length',8, 2);
+            $table->DOUBLE('tattoo_width',8, 2);
+            $table->STRING('tattoo_color');
+            $table->STRING('skin_type');
+            $table->STRING('tattoo_age');
+            $table->TEXT('tattoo_description')->nullable();
             $table->timestamps();
         });
     }
@@ -38,6 +38,6 @@ class CreateCustomeresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customeres');
+        Schema::dropIfExists('customers');
     }
 }

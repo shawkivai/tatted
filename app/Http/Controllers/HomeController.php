@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\model\Customer;
 use App\model\Postcode;
 use App\model\Suburb;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -32,7 +34,7 @@ class HomeController extends Controller
        $postcode = $request->get('postcode');
        //echo "<pre>";print_r($postcode);exit();
        if(!empty($postcode) && is_numeric($postcode)){
-           $data = Postcode::select('postcode_no','id')
+           $data = Postcode::select('postcode_no','id','state_id')
                ->where("postcode_no","LIKE","%{$postcode}%")
                ->limit(5)
                ->get();
@@ -41,7 +43,7 @@ class HomeController extends Controller
            $reponse=array();
            foreach($data as $row)
            {
-               $reponse[]=array('value'=>$row->postcode_no,'id'=>$row->id);
+               $reponse[]=array('value'=>$row->postcode_no,'id'=>$row->id, 'state_id'=>$row->state_id);
 
            }
            if(count($reponse))
@@ -87,16 +89,32 @@ class HomeController extends Controller
             'email' => 'email|required',
             'name' => 'required',
             'postcode_id' => 'required',
+            'suburb_id' => 'required',
+            'state_id' => 'required',
             'tatto_type' => 'required',
             'tatto_length' => 'required',
             'tatto_width' => 'required',
             'tattoo_age' => 'required',
         ]);
+        $color = json_encode($request->color);
 
-        $data = array([
-          ''
+        $customer = new Customer([
+          'email' => $request->get('email'),
+          'name' => $request->get('name'),
+          'postcode_id' => $request->get('postcode_id'),
+          'suburb_id' => $request->get('suburb_id'),
+          'state_id' => $request->get('state_id'),
+          'tattoo_type' => $request->get('tatto_type'),
+          'tattoo_length' => $request->get('tatto_length'),
+          'tattoo_width' => $request->get('tatto_width'),
+          'tattoo_color' => json_encode($request->get('color')),
+          'skin_type' => json_encode($request->get('skin_type')),
+          'tattoo_age' => $request->get('tattoo_age')
         ]);
-        echo "<pre>";print_r($request->all());exit();
+        $id = $customer->save();
+        if($id){
+            return redirect('/')->with('success', 'Data Saved Successfully!');
+        }
 
     }
 }

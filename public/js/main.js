@@ -11,7 +11,10 @@
         e(".zoom").magnificPopup({
             type: "image"
         }), e(".btn-popup").magnificPopup({
-            type: "inline"
+            type: "inline",
+            midClick: true,
+            mainClass: 'mfp-fade',
+            closeOnBgClick: false
         })
     }, a.toggle = function() {
         e(".open .content-toggle").show(), e(".title-toggle").on("click", function(a) {

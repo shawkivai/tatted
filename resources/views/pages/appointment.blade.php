@@ -41,6 +41,8 @@
 			<strong>3. What is your postcode *</strong>
             <input class="required" type="text" id="user_postcode" readonly>
             <input class="required" type="text" id="user_postcode_id" name="postcode_id" hidden>
+            <input type="text" id="user_suburb_id" name="suburb_id" hidden>
+            <input type="text" id="user_state_id" name="state_id" hidden>
 		</label>
         <div class="radio label">
             <strong>4. For an accurate quote please tells us want you want to achieve *</strong>
@@ -71,38 +73,38 @@
         </div>
         <label><strong>6. Tattoo Color *</strong></label>
         <div class="label">
-            <input type="checkbox" id="color1" name="color1" value="Black">
+            <input type="checkbox" id="color1" name="color[]" value="Black">
             <label for="color1">Black</label>
-            <input type="checkbox" id="color2" name="color2" value="Blue">
+            <input type="checkbox" id="color2" name="color[]" value="Blue">
             <label for="color2">Blue</label>
-            <input type="checkbox" id="color3" name="color3" value="Red">
+            <input type="checkbox" id="color3" name="color[]" value="Red">
             <label for="color3">Red</label>
-            <input type="checkbox" id="color4" name="color4" value="Orange">
+            <input type="checkbox" id="color4" name="color[]" value="Orange">
             <label for="color4">Orange</label>
-            <input type="checkbox" id="color5" name="color5" value="Yellow">
+            <input type="checkbox" id="color5" name="color[]" value="Yellow">
             <label for="color5">Yellow</label>
-            <input type="checkbox" id="color6" name="color6" value="Pink">
+            <input type="checkbox" id="color6" name="color[]" value="Pink">
             <label for="color6">Pink</label>
-            <input type="checkbox" id="color7" name="color7" value="Purple">
+            <input type="checkbox" id="color7" name="color[]" value="Purple">
             <label for="color7">Purple</label>
-            <input type="checkbox" id="color8" name="color8" value="Brown">
+            <input type="checkbox" id="color8" name="color[]" value="Brown">
             <label for="color8">Brown</label>
-            <input type="checkbox" id="color9" name="color9" value="Green">
+            <input type="checkbox" id="color9" name="color[]" value="Green">
             <label for="color9">Green</label>
         </div>
         <label><strong>7. Skin Type *</strong></label>
         <div class="label">
-            <input type="checkbox" id="skin_type1" name="skin_type1" value="pale_white">
+            <input type="checkbox" id="skin_type1" name="skin_type[]" value="pale_white">
             <label for="skin_type1">Pale white</label>
-            <input type="checkbox" id="skin_type2" name="skin_type2" value="fair">
+            <input type="checkbox" id="skin_type2" name="skin_type[]" value="fair">
             <label for="skin_type2">Fair</label>
-            <input type="checkbox" id="skin_type3" name="skin_type3" value="olive">
+            <input type="checkbox" id="skin_type3" name="skin_type[]" value="olive">
             <label for="skin_type3">Olive</label>
-            <input type="checkbox" id="skin_type4" name="skin_type4" value="light_brown">
+            <input type="checkbox" id="skin_type4" name="skin_type[]" value="light_brown">
             <label for="skin_type4">Light Brown</label>
-            <input type="checkbox" id="skin_type5" name="skin_type5" value="dark_brown">
+            <input type="checkbox" id="skin_type5" name="skin_type[]" value="dark_brown">
             <label for="skin_type5">Dark Brown</label>
-            <input type="checkbox" id="skin_type6" name="skin_type6" value="black">
+            <input type="checkbox" id="skin_type6" name="skin_type[]" value="black">
             <label for="skin_type6">Black</label>
         </div>
         <div class="radio label">
@@ -185,6 +187,8 @@
             select: function( event, ui ) {
                 $('#user_postcode').val(ui.item.value);
                 $('#user_postcode_id').val(ui.item.id);
+                console.log(ui.item.state_id);
+                $('#user_state_id').val(ui.item.state_id);
                 update_suburb(ui.item.id);
             }
 
@@ -239,7 +243,13 @@
             console.log(count);
             $(this).parents(".control-group").remove();
         });
-
+        $("#suburb").change(function(){
+            if($( "#suburb option:selected" ).val() != ''){
+                var suburb_id = $( "#suburb option:selected" ).val();
+                console.log(suburb_id);
+                $("#user_suburb_id").val(suburb_id);
+            }
+        });
 
     });
 </script>
