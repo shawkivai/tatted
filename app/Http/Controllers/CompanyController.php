@@ -22,6 +22,11 @@ class CompanyController extends Controller
 
     public function store(CompanyRequest $request)
     {
-        return $this->companyModel->create($request->only($this->companyModel->getModel()->fillable));
+        $companyData =  $this->companyModel->create($request->only($this->companyModel->getModel()->fillable));
+
+        if($companyData) {
+            return redirect(route('business.register'));
+        }
+        // return redirect(route('business.register'))->withErrors($request);
     }
 }

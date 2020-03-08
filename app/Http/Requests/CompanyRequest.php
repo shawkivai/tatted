@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CompanyRequest extends FormRequest
@@ -33,8 +34,6 @@ class CompanyRequest extends FormRequest
             'suburb_id'     => 'required|numeric',
             'service_type'  => 'string',
             'phone_no'      => 'string',
-
-
         ];
     }
 }

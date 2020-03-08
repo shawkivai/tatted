@@ -3,22 +3,31 @@
 @section('content')
 <div class="container">
 
-    <form id="request" class="contact-form popup" action="{{ route('api.company.store') }}" method="post">
+    <form id="compnay_form" class="contact-form popup" action="{{ route('api.company.store') }}" method="post">
         {{ csrf_field() }}
         <h3 class="focus-title"><i class="fa fa-thumb-tack"></i>Register Your Business</h3>
 
         <label>
             <strong>1. Enter email address *</strong>
-            <input class="required" type="email" name="email">
+            <input class="required" type="email" name="email" value="{{ old('email') }}">
+            @if($errors->has('email'))
+                <div class="error">{{ $errors->get('email') }}</div>
+            @endif
         </label>
         <label>
             <strong>2. Comapny name *</strong>
-            <input class="required" type="text" name="name">
+            <input class="required" type="text" name="name" value="{{ old('name') }}">
+            @if($errors->has('name'))
+                <div class="error">{{ $errors->get('name') }}</div>
+            @endif
         </label>
 
         <label>
         <strong>Address*</strong>
         <input class="required" type="text" name="address">
+        @if($errors->has('address'))
+            <div class="error">{{ $errors->get('address') }}</div>
+        @endif
         </label>
 
         <div class="row">
@@ -51,15 +60,21 @@
         <label>
             <strong>Phone Number *</strong>
             <input class="required" type="text" name="phone_no">
+            @if($errors->has('phone_no'))
+                <div class="error">{{ $errors->get('phone_no') }}</div>
+            @endif
         </label>
 
     <label><strong>Password *</strong> (ex: 5x4)
         <input class="required" type="password" name="password">
+        @if($errors->has('password'))
+            <div class="error">{{ $errors->get('password') }}</div>
+        @endif
     </label>
         
         <hr>
         <p>( <strong>*</strong> ) = Mandatory field</p>
-        <input class="submit btn md" type="submit" name="submit" value="Register Business">
+        <input class="submit btn md" type="submit" onClick="resetForm()" value="Register Business">
     </form>
 </div>
 
@@ -134,6 +149,15 @@ $(document).ready(function() {
             }
         }
     });
+
+    // function resetForm()
+    // {
+    //     this.$validator.validateAll().then(() =>
+    //         if(!this.errors.any){
+    //             $('#compnay_form').reset();
+    //         }
+    //     );
+    // }
 
 </script>
 @endSection

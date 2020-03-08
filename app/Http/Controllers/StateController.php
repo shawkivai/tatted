@@ -18,4 +18,14 @@ class StateController extends Controller
     {
         return $this->stateModel->all();
     }
+
+    public function statePostcodes(int $stateId)
+    {
+        return State::with('postcodes')->where('id', $stateId)->get();
+    }
+
+    public function stateSuburbs(int $stateId)
+    {
+        return State::with('suburbs')->where('id', $stateId)->paginate(50);
+    }
 }

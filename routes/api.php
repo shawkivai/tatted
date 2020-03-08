@@ -17,6 +17,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('company/store', 'CompanyController@store')->name('api.company.store');
+Route::post('company/store', 'CompanyController@store')
+    ->name('api.company.store');
 
-Route::get('/states', 'StateController@index')->name('api.state.index');
+Route::get('/states', 'StateController@index')
+    ->name('api.state.index');
+
+Route::get('/state/{stateId}/postcode', 'StateController@statePostcodes')
+    ->name('state.postcodes');
+
+Route::get('/state/{stateId}/suburb', 'StateController@stateSuburbs')
+    ->name('state.suburbs');
