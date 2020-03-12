@@ -15,13 +15,13 @@ class CreateSuburbsTable extends Migration
     {
         Schema::create('suburbs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('sate_id')->unsignedInteger();
+            $table->unsignedBigInteger('state_id')->unsignedInteger();
             $table->unsignedBigInteger('postcode_id');
             $table->string('suburb_name');
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();;
             $table->timestamps();
-            $table->foreign('sate_id')->references('id')->on('states')->onDelete('cascade');
+            $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
             $table->foreign('postcode_id')->references('id')->on('postcodes')->onDelete('cascade');
 
         });

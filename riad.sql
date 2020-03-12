@@ -3,13 +3,13 @@ INSERT INTO states (state_name,state_code)
 SELECT DISTINCT state_name,state_code
 FROM au_postcode;
 
-INSERT INTO postcodes (postcode_no,sate_id)
+INSERT INTO postcodes (postcode_no,state_id)
 SELECT DISTINCT au_postcode.postcode,states.id
 FROM au_postcode
 INNER JOIN states
 ON au_postcode.state_name = states.state_name;
 
-INSERT INTO suburbs (suburb_name,sate_id,postcode_id)
+INSERT INTO suburbs (suburb_name,state_id,postcode_id)
 SELECT  DISTINCT au_postcode.place_name,states.id,postcodes.id
 FROM au_postcode
 INNER JOIN states

@@ -1673,7 +1673,7 @@ ul.social-links a i {
 form label,
 form .label {
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 input,
@@ -3719,6 +3719,7 @@ html[xmlns] .flexslider .slides,
 .tatto-size-customize{
     width: 30% !important;
     padding: 6px !important;
+    margin-top: 2px !important;
 }
 .tatto-lenth-customize{
     padding: 8px;
@@ -3769,4 +3770,8 @@ input[type=checkbox]:checked:disabled + label:before {
     transform: scale(1);
     background-color: #bfb;
     border-color: #bfb;
+}
+.success-msg{
+    font-size: 25px;
+    color: green;
 }
