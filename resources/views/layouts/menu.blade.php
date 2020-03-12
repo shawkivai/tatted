@@ -73,5 +73,6 @@
             <script src="{!!url('/js/common.js')!!}"></script>
             <script src="{!!url('/js/config.js')!!}"></script>
             <script src="{!!url('/js/main.js')!!}"></script>
+            <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
 </body>
 </html>

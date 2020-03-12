@@ -7,6 +7,7 @@ use App\model\Postcode;
 use App\model\Suburb;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\model\Customer_photo;
 
 class HomeController extends Controller
 {
@@ -113,6 +114,20 @@ class HomeController extends Controller
         ]);
         $id = $customer->save();
         if($id){
+            if($request->hasFile('filename'))
+            {
+
+                foreach($request->file('filename') as $image)
+                {
+                    $name=$image->getClientOriginalName();
+                    $image->move(public_path().'/customer_image/'. $id .'/', $name);
+                    $data[] = '/customer_image/'. $id .'/' . $name;
+                }
+                $customer_photo= new Customer_photo();
+                $customer_photo->customer_id= $id;
+                $customer_photo->filename=json_encode($data);
+                $customer_photo->save();
+            }
             return redirect('/')->with('success', 'Data Saved Successfully!');
         }
 

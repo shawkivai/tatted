@@ -150,26 +150,13 @@
         var a = function(e) {
             return new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i).test(e)
         };
-        e("form").append('<div class="form-msg" style="display:none"><span></span><a href="#"></a></div>'), e("form").submit(function(n) {
-            n.preventDefault();
-            var t = e(this),
-                o = !1,
-                i = config.formMessages,
-                s = t.find(".form-msg"),
-                l = s.find("span"),
-                r = t.find('input[name="email"]').val(),
-                c = t.serialize();
-            return s.removeClass("fail success"), l.text(""), t.find(".required").each(function() {
-                ("" === e.trim(e(this).val()) || e(this).is(":checkbox:not(:checked)")) && (o = !0)
-            }), o ? (l.text(i.emptyFields).parent().addClass("fail").fadeIn("fast"), !1) : a(r) ? (t.find(".submit").after('<span class="form-loader" />'), void e.post(t.attr("action"), c, function(e) {
-                "success" == e ? (l.text(i.sent), t.trigger("reset")) : l.text(i.fail)
-            }).fail(function() {
-                l.text(i.fail)
-            }).always(function(e) {
-                t.find(".form-loader").remove(), s.addClass(e).fadeIn("fast")
-            })) : (l.text(i.failEmail).parent().addClass("fail").fadeIn("fast"), !1)
-        }), e(document).on("click", ".form-msg a", function() {
-            return e(this).parent().fadeOut(), e(".form-msg").hasClass("success") && e.magnificPopup.close(), !1
+        e("form").submit(function(n) {
+            if($('#email').val() !=''){
+                console.log('fgbf');
+                return true;
+            }else {
+                n.preventDefault();
+            }
         })
     }, a.instagram = {
         globalObjs: {
