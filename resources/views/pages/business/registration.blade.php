@@ -23,7 +23,7 @@
         </label>
 
         <label>
-        <strong>Address*</strong>
+        <strong>3. Address*</strong>
         <input class="required" type="text" name="address">
         @if($errors->has('address'))
             <div class="error">{{ $errors->get('address') }}</div>
@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-md-4">
                 <label>
-                    <strong>3. Select State</strong>
+                    <strong>4. Select State</strong>
                     <select name="state_id" id="state" class="select-replacer">
                         <option value="" hidden>Select State</option>
                     </select>
@@ -42,14 +42,14 @@
 
             <div class="col-md-4">
                 <label>
-                <strong>4. What is your postcode *</strong>
+                <strong>5. What is your postcode *</strong>
                 <input class="required" type="text" id="postcode" name="postcode" placeholder="Enter Postcode">
                 <input type="hidden" id="postcode_id" name="postcode_id">
             </label>
             </div>
             <div class="col-md-4">
                 <label>
-                    <strong>5. Select Suburb</strong>
+                    <strong>6. Select Suburb</strong>
                     <select name="suburb_id" id="suburb" class="select-replacer">
                         <option value="" hidden>Select Suburb</option>
                     </select>
@@ -57,15 +57,29 @@
             </div>
         </div>
 
-        <label>
-            <strong>Phone Number *</strong>
-            <input class="required" type="text" name="phone_no">
-            @if($errors->has('phone_no'))
-                <div class="error">{{ $errors->get('phone_no') }}</div>
-            @endif
-        </label>
+        <div class="row">
+            <div class="col-md-4">
+                <label>
+                    <strong>7. Service Type</strong>
+                    <select name="service_type" id="service_type" class="select-replacer">
+                        <option value="" hidden>Select Services</option>
+                        <option value="tatoo_removal">Tatoo Remove</option>
+                        <option value="tatoo_design">Tatoo Design</option>
+                    </select>
+                </label>
+            </div>
+            <div class="col-md-4">
+                <label>
+                    <strong>8. Phone Number *</strong>
+                    <input class="required" type="text" name="phone_no">
+                    @if($errors->has('phone_no'))
+                        <div class="error">{{ $errors->get('phone_no') }}</div>
+                    @endif
+                </label>
+            </div>
+        </div>                  
 
-    <label><strong>Password *</strong> (ex: 5x4)
+    <label><strong>9. Password *</strong> (ex: 5x4)
         <input class="required" type="password" name="password">
         @if($errors->has('password'))
             <div class="error">{{ $errors->get('password') }}</div>
