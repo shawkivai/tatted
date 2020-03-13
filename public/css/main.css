@@ -3775,3 +3775,7 @@ input[type=checkbox]:checked:disabled + label:before {
     font-size: 25px;
     color: green;
 }
+.warning-msg{
+    font-size: 25px;
+    color: red;
+}

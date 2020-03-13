@@ -152,7 +152,6 @@
         };
         e("form").submit(function(n) {
             if($('#email').val() !=''){
-                console.log('fgbf');
                 return true;
             }else {
                 n.preventDefault();
