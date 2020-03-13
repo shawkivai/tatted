@@ -8,4 +8,9 @@ class BusinessController extends Controller
     {
         return view('pages.business.registration');
     }
+
+    public function login()
+    {
+        return view('pages.business.login');
+    }
 }

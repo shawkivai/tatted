@@ -27,7 +27,13 @@ class CompanyRequest extends FormRequest
         return [
             'name'          => 'required|string',
             'email'         => 'required|string|unique:companies',
-            'password'      => 'required|string|min:8',
+            'password'      => ['required',
+                                'string',
+                                'min:8',
+                                'regex:/[a-z]/',
+                                'regex:/[A-Z]/',
+                                'regex:/[0-9]/'
+                                ],
             'address'       => 'string',
             'state_id'      => 'required|numeric',
             'postcode_id'   => 'required|numeric',

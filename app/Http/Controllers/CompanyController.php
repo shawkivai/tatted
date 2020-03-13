@@ -22,11 +22,18 @@ class CompanyController extends Controller
 
     public function store(CompanyRequest $request)
     {
-        $companyData =  $this->companyModel->create($request->only($this->companyModel->getModel()->fillable));
+        try {
+            $companyData =  $this->companyModel->create($request->only($this->companyModel->getModel()->fillable));
 
-        if($companyData) {
-            return redirect()->route('business.register')->with('registration', 'Successfully Registered');
+            if($companyData) {
+                return redirect()->route('business.login')->with('message', 'Successfully Registered');
+            }
+
+            }catch (\Exception $exception) {
+                return response()->json([
+                    'status'  => 'Error',
+                    'message' => $exception->getMessage()
+                ], 500);
         }
-        // return redirect(route('business.register'))->withErrors($request);
     }
 }

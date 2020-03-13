@@ -2,13 +2,6 @@
 @section('content')
 <div class="container">
 
-    <div class="success-msg">
-            @if(session('registration'))
-                <div class="alert alert-success">
-                    {{ session('registration') }}
-                </div>
-            @endif
-    </div>
     <form id="company_form" class="contact-form popup" action="{{ route('api.company.store') }}" method="post">
         {{ csrf_field() }}
         <h3 class="focus-title"><i class="fa fa-thumb-tack"></i>Register Your Business</h3>
@@ -37,7 +30,7 @@
             <div class="col-md-4">
                 <label>
                     <strong>4. Select State</strong>
-                    <select name="state_id" id="state" class="select-replacer">
+                    <select name="state_id" id="state" class="select-replacer required">
                         <option value="" hidden>Select State</option>
                     </select>
                 </label>
@@ -52,7 +45,7 @@
             <div class="col-md-4">
                 <label>
                     <strong>6. Select Suburb</strong>
-                    <select name="suburb_id" id="suburb" class="select-replacer">
+                    <select name="suburb_id" id="suburb" class="select-replacer required">
                         <option value="" hidden>Select Suburb</option>
                     </select>
                 </label>
@@ -131,14 +124,74 @@ $(document).ready(function() {
                 update_suburb(ui.item.id);
             }
         });
-        var $validator = $("#company_form").validate({
+
+
+        // Typing
+        // var typingTimer;                //timer identifier
+        // var doneTypingInterval = 2000;  //time in ms, 5 second for example
+        // var $input = $('#company_form');
+
+        // //on keyup, start the countdown
+        // $input.on('keyup', function () {
+        // clearTimeout(typingTimer);
+        // typingTimer = setTimeout(doneTyping, doneTypingInterval);
+        // });
+
+        // //on keydown, clear the countdown 
+        // $input.on('keydown', function () {
+        // clearTimeout(typingTimer);
+        // });
+
+        //user is "finished typing," do something
+            var $validator = $("#company_form").validate({
             ignore: [],
-            rules: {
-                field: {
-                    required: true
+                rules: {
+                    field: {
+                        required: true
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                        remote: {
+                            url: "{{route('company.emailValidation')}}",
+                            type: "post",
+                        }
+                    },
+                    name: {
+                        required: true,
+                        remote: {
+                            url: "{{route('company.nameValidation')}}",
+                            type: "post",
+                        }
+                    },
+                    password: {
+                        required: true,
+                        remote: {
+                            url: "{{route('company.passwordValidation')}}",
+                            type: "post",
+                        }
+                    }
+
                 },
-            }
-        });
+                messages: {
+                    email: {
+                        required: "Please Enter Email!",
+                        email: "This is not a valid email!",
+                        remote: "Email already in use!"
+                    },
+                    name: {
+                        required: "Please Enter Company Name",
+                        remote: "Company already registered!"
+                    },
+                    password: {
+                        required: "Please Enter a strong Password",
+                        remote: "Password is not strong (NB: Enter At least one lowecase, one uppecase and number)"
+                    },
+                    
+                }
+            });
+
+
         function update_suburb(postcode_id) {
             if (postcode_id != '') {
                 $.ajax({
@@ -161,14 +214,6 @@ $(document).ready(function() {
             }
         }
     });
-    // function resetForm()
-    // {
-    //     this.$validator.validateAll().then(() =>
-    //         if(!this.errors.any){
-    //             $('#compnay_form').reset();
-    //         }
-    //     );
-    // }
 </script>
 <style>
     .error{

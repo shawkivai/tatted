@@ -28,3 +28,12 @@ Route::get('/state/{stateId}/postcode', 'StateController@statePostcodes')
 
 Route::get('/state/{stateId}/suburb', 'StateController@stateSuburbs')
     ->name('state.suburbs');
+
+Route::post('/company/emailValidation', 'ValidationController@emailValidation')
+    ->name('company.emailValidation');
+
+Route::post('/company/nameValidation', 'ValidationController@companyNameValidation')
+    ->name('company.nameValidation');
+
+Route::post('/company/passwordValidation', 'ValidationController@passwordValidation')
+    ->name('company.passwordValidation');

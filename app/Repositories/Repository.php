@@ -132,4 +132,9 @@ class Repository implements RepositoryInterface
     {
         return $this->model->where($attribute, $value);
     }
+
+    public function get()
+    {
+        return $this->model->get();
+    }
 }

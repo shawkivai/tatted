@@ -22,4 +22,5 @@ Route::post('/save_user_information', 'HomeController@save_user_information')->n
 
 Route::get('/business-registration', 'BusinessController@index')->name('business.register');
 
+Route::get('/business-login', 'BusinessController@login')->name('business.login');
 
