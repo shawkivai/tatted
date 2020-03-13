@@ -1,5 +1,5 @@
 
-@extends('layouts.menu')
+@extends('layouts.globalMenu')
 
 @section('content')
 

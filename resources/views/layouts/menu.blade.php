@@ -28,46 +28,11 @@
                 <div class="bg-overlay"></div>
                 <div id="media-container"></div>
                 <div class="top-header">
-                    <div class="container">
-
-                        <!-- ============ Main Navigation - START ============ -->
-
-                        <div class="row">
-                            <div class="col-md-9">
-                                <a id="nav-toggle" href="#"><span></span></a>
-                                <nav id="nav-menu">
-                                    <ul>   
-                                        <!-- <li><a title="Last Works" href="#last-works">Last Works</a></li> -->
-                                        <li><a title="Services" href="#services">Services</a></li>
-                                        <li><a title="Artists" href="#artists">Artists</a></li>
-                                        <li><a title="Contact Us" href="#contacts">Contact Us</a></li>
-                                        <li><a title="Appointment" href="#appointment"><i class="fa fa-thumb-tack"></i>Appointment</a></li>
-                                    </ul>
-                                    
-                                </nav>
-                            </div>
-                            
-                            <div class="col-md-3">
-                                <button class="button button2"><a href="{{route('business.register')}}"><i class="fa fa-thumb-tack"></i>Register Business </a></button>
-                            </div>
-                        </div>
-
-                         <!-- ============ Main Navigation - END ============ -->
-
-                    </div>
+                    @yield('menu')
+  
                     
 
                 </div>
-
-                <!-- <div id="brand">
-
-                    <h1 id="logo"><img src="img/logo-big.png" alt="The Tattooist - Tattoo Studio"></h1>
-                    <div class="info">
-                        <span>Tattoos</span><img src="img/divider.png" alt=""><span>Piercings</span>
-                    </div>
-
-                </div> -->
-
             </header>
 
         <div id="app">

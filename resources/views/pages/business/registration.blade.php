@@ -1,4 +1,4 @@
-@extends('layouts.menu')
+@extends('layouts.companyMenu')
 @section('content')
 <div class="container">
 
@@ -218,6 +218,15 @@ $(document).ready(function() {
 <style>
     .error{
         color: red;
+    }
+    .focus-title{
+        margin-top: 0;
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    .popup {
+        margin: 40px auto;
     }
 </style>
 @endSection
