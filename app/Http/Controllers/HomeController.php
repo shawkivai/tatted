@@ -8,6 +8,8 @@ use App\model\Suburb;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\model\Customer_photo;
+use Illuminate\Support\Facades\Validator;
+
 
 class HomeController extends Controller
 {
@@ -86,7 +88,7 @@ class HomeController extends Controller
     }
 
     public function save_user_information(Request $request){
-        $request->validate([
+        $validator = Validator::make($request->all(),[
             'email' => 'email|required',
             'name' => 'required',
             'postcode_id' => 'required',
@@ -96,39 +98,51 @@ class HomeController extends Controller
             'tatto_length' => 'required',
             'tatto_width' => 'required',
             'tattoo_age' => 'required',
+            'filename.*' => 'image|mimes:jpeg,png,jpg|max:5120',
         ]);
+        if ($validator->fails()) {
+            return redirect('/')
+                ->withErrors($validator)
+                ->withInput();
+        }
         $color = json_encode($request->color);
+        DB::beginTransaction();
+        try {
+            $customer = new Customer([
+                'email' => $request->get('email'),
+                'name' => $request->get('name'),
+                'postcode_id' => $request->get('postcode_id'),
+                'suburb_id' => $request->get('suburb_id'),
+                'state_id' => $request->get('state_id'),
+                'tattoo_type' => $request->get('tatto_type'),
+                'tattoo_length' => $request->get('tatto_length'),
+                'tattoo_width' => $request->get('tatto_width'),
+                'tattoo_color' => json_encode($request->get('color')),
+                'skin_type' => json_encode($request->get('skin_type')),
+                'tattoo_age' => $request->get('tattoo_age')
+            ]);
+            $customer->save();
+            $id = $customer->id;
+            if ($id) {
 
-        $customer = new Customer([
-          'email' => $request->get('email'),
-          'name' => $request->get('name'),
-          'postcode_id' => $request->get('postcode_id'),
-          'suburb_id' => $request->get('suburb_id'),
-          'state_id' => $request->get('state_id'),
-          'tattoo_type' => $request->get('tatto_type'),
-          'tattoo_length' => $request->get('tatto_length'),
-          'tattoo_width' => $request->get('tatto_width'),
-          'tattoo_color' => json_encode($request->get('color')),
-          'skin_type' => json_encode($request->get('skin_type')),
-          'tattoo_age' => $request->get('tattoo_age')
-        ]);
-        $id = $customer->save();
-        if($id){
-            if($request->hasFile('filename'))
-            {
+                if ($request->hasFile('filename')) {
 
-                foreach($request->file('filename') as $image)
-                {
-                    $name=$image->getClientOriginalName();
-                    $image->move(public_path().'/customer_image/'. $id .'/', $name);
-                    $data[] = '/customer_image/'. $id .'/' . $name;
+                    foreach ($request->file('filename') as $image) {
+                        $name = $image->getClientOriginalName();
+                        $image->move(public_path() . '/customer_image/' . $id . '/', $name);
+                        $data[] = '/customer_image/' . $id . '/' . $name;
+                    }
+                    $customer_photo = new Customer_photo();
+                    $customer_photo->customer_id = $id;
+                    $customer_photo->filename = json_encode($data);
+                    $customer_photo->save();
                 }
-                $customer_photo= new Customer_photo();
-                $customer_photo->customer_id= $id;
-                $customer_photo->filename=json_encode($data);
-                $customer_photo->save();
             }
+            DB::commit();
             return redirect('/')->with('success', 'Data Saved Successfully!');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/')->with('warning','Something Went Wrong!');
         }
 
     }

@@ -1,3 +1,4 @@
+
 function onYouTubeIframeAPIReady() {
     ytp.YTAPIReady || (ytp.YTAPIReady = !0, jQuery(document).trigger("YTAPIReady"))
 }
@@ -2018,7 +2019,14 @@ function setFilter(e, t, r) {
                 var i = t.st.closeOnContentClick,
                     n = t.st.closeOnBgClick;
                 if (i && n) return !0;
-                if (!t.content || e(r).hasClass("mfp-close") || t.preloader && r === t.preloader[0]) return !0;
+                if (!t.content || e(r).hasClass("mfp-close") || t.preloader && r === t.preloader[0]){
+                    $('form')[0].reset();
+                    $('#postcode').val('');
+                    $('#suburb').val('');
+                    $('.btn-popup').hide();
+                    $('.error').empty();
+                    return !0;
+                }
                 if (r === t.content[0] || e.contains(t.content[0], r)) {
                     if (i) return !0
                 } else if (n && e.contains(document, r)) return !0;
@@ -2069,6 +2077,7 @@ function setFilter(e, t, r) {
                 t.isObj = !0, t.index = r || 0, this.instance.open(t)
         },
         close: function() {
+            $('#request')[0].reset();
             return e.magnificPopup.instance && e.magnificPopup.instance.close()
         },
         registerModule: function(t, r) {

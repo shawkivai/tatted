@@ -4,7 +4,18 @@
 	<h2>Are you ready to Remove a tattoo!</h2>
 
 	<div class="cta-info">Request an appointment <strong>NOW</strong>!</div>
-
+    <div class="warning-msg">
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <span>{{ $error }}</span>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
     <div class="success-msg">
         @if(session('success'))
             <div class="alert alert-success">
@@ -38,11 +49,11 @@
 
         <label>
             <strong>1. Enter email address for quotes *</strong>
-            <input class="required" type="text" id="email" name="email">
+            <input class="required" type="text" id="email" name="email" value="{{ old('email') }}">
         </label>
 		<label>
 			<strong>2. Tell us your name *</strong>
-			<input class="required" type="text" name="name">
+			<input class="required" type="text" name="name" value="{{ old('name') }}">
 		</label>
 
 		<label>
@@ -338,7 +349,7 @@
 
     $('.photo_id').change(function(){
         var fp = $(".photo_id");
-        console.log('fgfd');
+        //console.log('fgfd');
         var lg = fp[0].files.length; // get length
         var items = fp[0].files;
         var fileSize = 0;
@@ -347,10 +358,10 @@
             for (var i = 0; i < lg; i++) {
                 fileSize = fileSize+items[i].size; // get file size
             }
-            console.log(fileSize);
+            //console.log(fileSize);
             if(fileSize > 2097152) {
-                alert('File size must not be more than 2 MB');
-                $('#fUpload').val('');
+                alert('File size must not be more than 1 MB');
+                $('.photo_id').val('');
             }
         }
     });
