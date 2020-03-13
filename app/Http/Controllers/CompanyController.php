@@ -25,7 +25,7 @@ class CompanyController extends Controller
         $companyData =  $this->companyModel->create($request->only($this->companyModel->getModel()->fillable));
 
         if($companyData) {
-            return redirect(route('business.register'));
+            return redirect()->route('business.register')->with('registration', 'Successfully Registered');
         }
         // return redirect(route('business.register'))->withErrors($request);
     }
