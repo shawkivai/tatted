@@ -3779,3 +3779,11 @@ input[type=checkbox]:checked:disabled + label:before {
     font-size: 25px;
     color: red;
 }
+.tatoo-age-input{
+    width: 20% !important;
+    margin-top: 5px !important;
+}
+#tattoo_age_name{
+    color: #161616;
+    font-weight: bold;
+}

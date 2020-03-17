@@ -151,6 +151,12 @@
             <br>
             <label for="tattoo_age" class="error" style="display: none"></label>
         </div>
+        <label id="tatoo-age-input_show">
+            <strong> Tattoo Age Period * : </strong>
+            <input class="required tatoo-age-input" type="number" name="tattoo_age_period" value="">
+            <span id="tattoo_age_name"></span>
+            <label for="tattoo_age_period" class="error" style="display: none"></label>
+        </label>
 {{--		<label><strong>9. Tattoo Description *</strong>--}}
 {{--			<textarea class="required" name="description"></textarea>--}}
 {{--		</label>--}}
@@ -191,6 +197,7 @@
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     $(document).ready(function() {
         $('.btn-popup').hide();
+        $('#tatoo-age-input_show').hide();
         $("#postcode").autocomplete({
             source: function(request, response) {
                 $.ajax({
@@ -210,7 +217,7 @@
             select: function( event, ui ) {
                 $('#user_postcode').val(ui.item.value);
                 $('#user_postcode_id').val(ui.item.id);
-                console.log(ui.item.state_id);
+                //console.log(ui.item.state_id);
                 $('#user_state_id').val(ui.item.state_id);
                 update_suburb(ui.item.id);
             }
@@ -249,7 +256,7 @@
             }else{
                 count += 1;
             }
-            console.log(count);
+            //console.log(count);
             if(count < 4){
                 var html = $(".clone").html();
                 console.log(count);
@@ -263,13 +270,13 @@
             }else if(count > 0){
                 count -=1;
             }
-            console.log(count);
+            //console.log(count);
             $(this).parents(".control-group").remove();
         });
         $("#suburb").change(function(){
             if($( "#suburb option:selected" ).val() != ''){
                 var suburb_id = $( "#suburb option:selected" ).val();
-                console.log(suburb_id);
+                //console.log(suburb_id);
                 $("#user_suburb_id").val(suburb_id);
             }
         });
@@ -337,10 +344,10 @@
             return allVals4.length >= 1;
         }, "<i class='fa fa-exclamation-circle'></i>" + "<span> Please select at least one age.</span>");
     });
-    $(".mfp-close").click(function () {
-        console.log('gfhg');
-        $("#postcode").val('');
-    })
+    // $(".mfp-close").click(function () {
+    //     console.log('gfhg');
+    //     $("#postcode").val('');
+    // })
 
     //file upload validation
 
@@ -360,6 +367,19 @@
                 alert('File size must not be more than 1 MB');
                 $('.photo_id').val('');
             }
+        }
+    });
+    //
+    //tatoo-age-input_show
+    $('#tattoo_age').change(function () {
+        var tattoo_age_val = $('#tattoo_age :checked').val();
+        console.log(tattoo_age_val);
+        if (tattoo_age_val != '') {
+            $('#tattoo_age_name').empty();
+            $('#tatoo-age-input_show').show();
+            $('#tattoo_age_name').append(tattoo_age_val.toUpperCase());
+        } else {
+            $('#tatoo-age-input_show').hide();
         }
     });
     //

@@ -98,6 +98,7 @@ class HomeController extends Controller
             'tatto_length' => 'required',
             'tatto_width' => 'required',
             'tattoo_age' => 'required',
+            'tattoo_age_period' => 'required',
             'filename.*' => 'image|mimes:jpeg,png,jpg|max:5120',
         ]);
         if ($validator->fails()) {
@@ -119,7 +120,8 @@ class HomeController extends Controller
                 'tattoo_width' => $request->get('tatto_width'),
                 'tattoo_color' => json_encode($request->get('color')),
                 'skin_type' => json_encode($request->get('skin_type')),
-                'tattoo_age' => $request->get('tattoo_age')
+                'tattoo_age' => $request->get('tattoo_age'),
+                'tattoo_age_period' => $request->get('tattoo_age_period')
             ]);
             $customer->save();
             $id = $customer->id;
